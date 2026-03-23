@@ -1,0 +1,13 @@
+# Ignorar ejecutables de GCC
+*.exe
+
+# Archivos de backup de C
+*.o
+*.obj
+
+# Archivos temporales del sistema
+*.log
+*.tmp
+
+# Carpeta de compilación (si existe)
+build/
