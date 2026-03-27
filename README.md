@@ -20,14 +20,4 @@ Cada proyecto tiene su propia carpeta con código, archivos necesarios y un mini
 - C
 - Git / GitHub para control de versiones
 
-_(Agregar aquí otras tecnologías según tus proyectos)_
-
 ---
-
-## 📌 Cómo usar estos proyectos
-
-1. Clonar el repositorio:
-
-```bash
-git clone https://github.com/Ansiedad07/IDSSI-portafolio.git
-```
