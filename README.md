@@ -6,12 +6,7 @@ Este repositorio contiene proyectos, ejercicios y prácticas desarrolladas duran
 
 ## 📂 Contenido del repositorio
 
-Cada proyecto tiene su propia carpeta con código, archivos necesarios y un mini README si aplica:
-
-- **estructura-datos/**: Ejercicios de estructuras de datos en Java
-- **programacion-web/**: Prácticas de desarrollo web (HTML, CSS, JS)
-- **algoritmos/**: Resolución de problemas de algoritmos y lógica
-- **proyecto-final/**: Proyecto completo integrando varias tecnologías
+- **estructura-datos/**: Ejercicios de estructuras de datos en C
 
 ---
 
