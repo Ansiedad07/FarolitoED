@@ -6,9 +6,9 @@
 #include <stdlib.h>
 #include <time.h>
 
-void ingresarDatos(int *ptr);
-void mostrarDatos(int *ptr);
-void liberarMemoria(int *ptr);
+void ingresarDatos(int *ptr, int n);
+void mostrarDatos(int *ptr, int n);
+void liberarMemoria(int **ptr);
 
 int menu() {
     int opcion;
@@ -22,22 +22,12 @@ int menu() {
 
     return opcion;
 }
-/*void reservarMemoria(int **ptr2) {
-    int n;
-    printf("¿Cuántos enteros deseas almacenar? ");
-    scanf("%d", &n);
-    *ptr2 = (int *)malloc(sizeof(int) * n); // Se asigna memoria dinámica para n enteros
-    if (*ptr2 == NULL)
-        printf("Error al asignar memoria.\n");
-    else
-        printf("Memoria reservada para %d enteros.\n", n);
-}*/
-int * reservarMemoria(void) {
+
+int * reservarMemoria(int *n) {
 	int *ptrTemp; // Se crea una variable temporal (es una memoria estatica, se destruye al salir de la función)
-	int n;
 	printf("¿Cuántos enteros deseas almacenar? ");
-	scanf("%d", &n);
-	ptrTemp = (int *)malloc(sizeof(int) * n); // Se asigna memoria dinámica para n enteros (este bloque no se destruye)
+	scanf("%d", &(*n));
+	ptrTemp = (int *)malloc(sizeof(int) * (*n)); // Se asigna memoria dinámica para n enteros (este bloque no se destruye)
 	if (ptrTemp == NULL)
 		printf("Error al asignar memoria.\n");
 
@@ -46,29 +36,25 @@ int * reservarMemoria(void) {
 
 int main(void) {
     int *ptr = NULL; // Declaración de un apuntador a entero
+	int n = 0;
     int opcion;
     srand(time(NULL));
 
-    // Asignar la cantidad de memoria para asignar en bytes
-    /*ptr = (int *)malloc(sizeof(int) * 5);
-	if(ptr == NULL)
-		printf("Error al asignar memoria.\n");
-	*/
     do {
         // Mandar a traer a menu para desplegar el menú y que el usuario elija una opción
         opcion = menu();
         switch (opcion) {
 			case 1:
-				ptr = reservarMemoria();
+				ptr = reservarMemoria(&n);
 				break;
             case 2:
-                ingresarDatos(ptr);
+                ingresarDatos(ptr, n);
                 break;
             case 3:
-                mostrarDatos(ptr);
+                mostrarDatos(ptr, n);
                 break;
             case 4:
-                liberarMemoria(ptr);
+                liberarMemoria(&ptr);
                 break;
             case 5:
                 printf("Saliendo del programa.\n");
@@ -78,39 +64,37 @@ int main(void) {
         }
     } while (opcion != 5);
 
-    // Liberar la memoria asignada
-    //free(ptr);
     return 0;
 }
-void liberarMemoria(int *ptr) {
-    if (ptr != NULL) {
-        free(ptr); // Liberar la memoria asignada
-        ptr = NULL;
+void liberarMemoria(int **ptr) {
+    if (*ptr != NULL) {
+        free(*ptr); // Liberar la memoria asignada
+        *ptr = NULL;
         printf("Memoria liberada.\n");
     } else {
         printf("No hay memoria para liberar.\n");
     }
 }
 
-void ingresarDatos(int *ptr) {
+void ingresarDatos(int *ptr, int n) {
     if(ptr == NULL) {
         printf("No se ha reservado memoria.\n");
         return;
     } else {
         printf("\nDatos asignados\n");
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < n; ++i) {
             *(ptr + i) = rand() % 10 + 1;
         }
     }
 }
 
-void mostrarDatos(int *ptr) {
+void mostrarDatos(int *ptr, int n) {
     if(ptr == NULL) {
         printf("No se ha reservado memoria.\n");
         return;
     } else {
         printf("\nValores almacenados en la memoria dinámica:\n");
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < n; ++i) {
             printf("Valor %d: %d\n", i + 1, ptr[i]);
         }
     }
