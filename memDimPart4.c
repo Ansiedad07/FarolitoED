@@ -2,6 +2,7 @@
  * Memoria Dinámica parte 4: Menú para reservar memoria, ingresar datos, mostrar datos y liberar memoria
  * En este programa se muestra un menú que permite al usuario reservar memoria dinámica para almacenar una cantidad de enteros, ingresar datos aleatorios, mostrar los datos almacenados y liberar la memoria asignada. El programa utiliza funciones para cada una de estas operaciones, y el usuario puede elegir la opción deseada a través del menú.
  */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -36,7 +37,7 @@ int * reservarMemoria(int *n) {
 
 int main(void) {
     int *ptr = NULL; // Declaración de un apuntador a entero
-	int n = 0;
+	int n = 0; // Variable para almacenar la cantidad de enteros a reservar
     int opcion;
     srand(time(NULL));
 
@@ -45,7 +46,11 @@ int main(void) {
         opcion = menu();
         switch (opcion) {
 			case 1:
-				ptr = reservarMemoria(&n);
+				if(ptr != NULL){
+    				printf("Debes liberar la memoria antes de volver a reservar. (Liberando memoria)\n");
+    				liberarMemoria(&ptr);
+				}
+				ptr = reservarMemoria(&n); // Paso por referencia para modificar el valor de n dentro de la función reservarMemoria
 				break;
             case 2:
                 ingresarDatos(ptr, n);
@@ -55,6 +60,7 @@ int main(void) {
                 break;
             case 4:
                 liberarMemoria(&ptr);
+				n = 0; // Reiniciar n después de liberar la memoria
                 break;
             case 5:
                 printf("Saliendo del programa.\n");
@@ -66,7 +72,7 @@ int main(void) {
 
     return 0;
 }
-void liberarMemoria(int **ptr) {
+void  liberarMemoria(int **ptr) {
     if (*ptr != NULL) {
         free(*ptr); // Liberar la memoria asignada
         *ptr = NULL;
