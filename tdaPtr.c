@@ -27,22 +27,26 @@ void mostrarDato(struct Dato *ptr);
 void liberarDato(struct Dato **ptr);
 
 int main (void){
-	struct Dato *ptr = NULL;
+	struct Dato *ptr = NULL, *ptrTemp = NULL, *ptrAux = NULL;
 	int opcion;
 
 	do{
 		opcion = menu();
 		switch(opcion){
 			case 1:
-				ptr = crearDato();
-				if(ptr == NULL){
+				ptrTemp = crearDato();
+				if(ptrTemp == NULL){
 					printf("No se pudo crear el dato.\n");
 				} else {
 					printf("Dato creado exitosamente.\n");
 					if(ptr == NULL){
-						//ptr = ptrTemp;
+						ptr = ptrTemp;
 					} else {
-
+						ptrAux = ptr;
+						while(ptrAux->ptrSig != NULL){
+							ptrAux = ptrAux->ptrSig;
+						}
+						ptrAux->ptrSig = ptrTemp;
 					}
 				}
 				break;
@@ -50,7 +54,7 @@ int main (void){
 				// Mostrar dato
 				break;
 			case 3:
-				// Liberar dato
+				liberarDato(&ptr);
 				break;
 			case 4:
 				// Salir
@@ -67,6 +71,12 @@ int main (void){
  * 2.- La direccion de la variable ptr e implementa doble apuntador para modificar ptr desde la funcion, es decir, crearDato(&ptr);
  */
 struct Dato * crearDato(void){
+	/**
+	 * Pasos para crear un nuevo dato(nodo):
+	 * 1.- Crear de forma dinamica el nuevo nodo con la funcion malloc y guardar su referencia en un apuntador temporal.
+	 * 2.- Buscar la posición de este nuevo nodo dentro de la estructura tipo pila
+	 * 2.1.- Primer caso: Si la pila esta vacia, el nuevo nodo se convierte en el nodo inicial de la pila, y hacemos que el apuntador principal guarde su referencia.
+	 */
 	struct Dato *ptrTemp; // Se crea una variable temporal (es una memoria estatica, se destruye al salir de la función)
 	ptrTemp = (struct Dato *)malloc(sizeof(struct Dato)); // Se asigna memoria dinámica para un dato (este bloque no se destruye)
 	if(ptrTemp == NULL){
@@ -84,6 +94,11 @@ void mostrarDato(struct Dato *ptr){
 }
 
 void liberarDato(struct Dato **ptr){
+	if(ptrAux != NULL){
+		
+	} else {
+		printf("No hay datos para liberar.\n");
+	}
 }
 
 /**
