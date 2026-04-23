@@ -42,11 +42,11 @@ int main (void){
 					if(ptr == NULL){
 						ptr = ptrTemp;
 					} else {
-						ptrAux = ptr;
-						while(ptrAux->ptrSig != NULL){
-							ptrAux = ptrAux->ptrSig;
+						ptrAux = ptr; // Se crea un apuntador auxiliar para recorrer la lista enlazada
+						while(ptrAux->ptrSig != NULL){ // Se recorre la lista enlazada hasta llegar al último nodo, el cual apunta a NULL
+							ptrAux = ptrAux->ptrSig; // Se actualiza el apuntador auxiliar para que apunte al siguiente nodo, hasta llegar al último nodo de la lista enlazada
 						}
-						ptrAux->ptrSig = ptrTemp;
+						ptrAux->ptrSig = ptrTemp; // Se enlaza el nuevo nodo al final de la lista enlazada, haciendo que el último nodo apunte al nuevo nodo creado
 					}
 				}
 				break;
@@ -93,11 +93,26 @@ struct Dato * crearDato(void){
 void mostrarDato(struct Dato *ptr){
 }
 
+/**
+ * Pasos para liberar un dato(nodo):
+ * 1.- Verificar el penultimo nodo de la estructura tipo pila
+ */
 void liberarDato(struct Dato **ptr){
-	if(ptrAux != NULL){
-		
-	} else {
+	struct Dato *ptrAux; // Se crea un apuntador auxiliar para recorrer la lista enlazada
+	if(*ptr == NULL){
 		printf("No hay datos para liberar.\n");
+	} else {
+		if((*ptr)->ptrSig == NULL){ // Si el nodo inicial de la lista enlazada no apunta a ningún otro nodo, es decir, si es el único nodo de la lista
+			free(*ptr); // Se libera la memoria del nodo inicial de la lista enlazada
+			*ptr = NULL; // Se asigna NULL al apuntador principal para indicar que la lista enlazada está vacía
+		} else {
+			ptrAux = *ptr; // Se asigna el valor del apuntador principal al apuntador auxiliar para recorrer la lista enlazada
+			while(ptrAux->ptrSig != NULL){ // Se recorre la lista enlazada hasta llegar al último nodo, el cual apunta a NULL
+				ptrAux = ptrAux->ptrSig; // Se actualiza el apuntador auxiliar para que apunte al siguiente nodo, hasta llegar al último nodo de la lista enlazada
+			}
+			free(ptrAux); // Se libera la memoria del último nodo de la lista enlazada
+			*ptr = NULL;
+		}
 	}
 }
 
