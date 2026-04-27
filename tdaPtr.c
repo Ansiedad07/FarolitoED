@@ -51,7 +51,7 @@ int main (void){
 				}
 				break;
 			case 2:
-				// Mostrar dato
+				mostrarDato(ptr);
 				break;
 			case 3:
 				liberarDato(&ptr);
@@ -91,6 +91,11 @@ struct Dato * crearDato(void){
 }
 
 void mostrarDato(struct Dato *ptr){
+	// Mostrar dato
+	while(ptr != NULL){
+		printf("%d\n", ptr->d); // Se muestra el valor del dato actual
+		ptr = ptr->ptrSig; // Se actualiza el apuntador para que apunte al siguiente nodo de la lista enlazada, hasta llegar a NULL
+	}
 }
 
 /**
