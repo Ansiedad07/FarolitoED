@@ -27,8 +27,8 @@ int submenu(void){
 	printf("\n1.- Buscar\n");
 	printf("2.- Contar\n");
 	printf("3.- Remplazar\n");
-	printf("4.- Ordenar");
-	printf("5.- Salir");
+	printf("4.- Ordenar\n");
+	printf("5.- Salir\n");
 	scanf("%d", &opcion);
 	return opcion;
 }
@@ -36,6 +36,8 @@ int submenu(void){
 struct Dato* crearDato(void);
 void mostrarDato(struct Dato *ptr);
 void liberarDato(struct Dato **ptr);
+int buscar(struct Dato *ptr, int valor);
+void reemplazar(struct Dato *ptr, int viejo, int nuevo);
 void contar(struct Dato *ptr);
 
 int main (void){
@@ -65,18 +67,29 @@ int main (void){
 			case 2:
 				do{
 					op2 = submenu();
+					int val, nuevo;
 					switch (op2)
 					{
 					case 1:
-						printf("Buscar");
-						//buscar(ptr);
+						printf("\nValor a buscar: ");
+						scanf("%d", &val);
+						buscar(ptr, val);
+
 						break;
 					case 2:
 						printf("Contar");
 						contar(ptr);
 						break;
 					case 3:
-						printf("Regresando");
+						printf("\nValor a reemplazar: ");
+						scanf("%d", &val);
+						printf("Nuevo valor: ");
+						scanf("%d", &nuevo);
+						reemplazar(ptr, val, nuevo);
+						break;
+					case 4:
+						break;
+					case 5:
 						break;
 					default:
 						printf("Opción incorrecta");
@@ -170,6 +183,19 @@ void liberarDato(struct Dato **ptr){
 	}
 }
 
+int buscar(struct Dato *ptr, int valor){
+	int posicion = 1;
+	while(ptr != NULL){
+		if(ptr->d == valor){
+			printf("\nValor encontrado en la posición %d\n", posicion);
+		} else {
+			printf("\nNo se encontro el valor\n");
+		}
+		ptr = ptr->ptrSig;
+		posicion++;
+	}
+}
+
 void contar(struct Dato *ptr){
 	int cont = 0;
 	while(ptr != NULL){
@@ -179,6 +205,21 @@ void contar(struct Dato *ptr){
 	printf("\nEl número de nodos es: %d\n", cont); // Se muestra el número total de nodos en la lista enlazada
 }
 
+void reemplazar(struct Dato *ptr, int viejo, int nuevo){
+	int encontrado = 0;
+	while(ptr != NULL){
+		if(ptr->d == viejo){
+			ptr->d = nuevo;
+			encontrado = 1;
+		}
+		ptr = ptr->ptrSig;
+	}
+	if(encontrado){
+		printf("\nValor reemplazado\n");
+	} else {
+		printf("\nNo se encontro el valor a reemplazar\n");
+	}
+}
 /**
  * Si ves esto prometo mejorarlo xd
  */
