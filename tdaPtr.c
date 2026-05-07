@@ -38,7 +38,8 @@ void mostrarDato(struct Dato *ptr);
 void liberarDato(struct Dato **ptr);
 int buscar(struct Dato *ptr, int valor);
 void reemplazar(struct Dato *ptr, int viejo, int nuevo);
-void contar(struct Dato *ptr);
+int contar(struct Dato *ptr);
+void ordenar(struct Dato **ptr);
 
 int main (void){
 	struct Dato *ptr = NULL, *ptrTemp = NULL, *ptrAux = NULL, *temp = NULL;
@@ -88,6 +89,7 @@ int main (void){
 						reemplazar(ptr, val, nuevo);
 						break;
 					case 4:
+						ordenar(&ptr);
 						break;
 					case 5:
 						break;
@@ -156,7 +158,7 @@ void mostrarDato(struct Dato *ptr){
 		while(ptr != NULL){
 			printf("%d -> ", ptr->d); // Se muestra el valor del dato actual
 			ptr = ptr->ptrSig; // Se actualiza el apuntador para que apunte al siguiente nodo de la lista
-	}
+		}
 	}
 }
 
@@ -196,13 +198,14 @@ int buscar(struct Dato *ptr, int valor){
 	}
 }
 
-void contar(struct Dato *ptr){
+int contar(struct Dato *ptr){
 	int cont = 0;
 	while(ptr != NULL){
 		ptr = ptr->ptrSig; // Se actualiza el apuntador para que apunte al siguiente nodo de la lista
 		cont++; // Se incrementa el contador por cada nodo de la lista enlazada
 	}
 	printf("\nEl número de nodos es: %d\n", cont); // Se muestra el número total de nodos en la lista enlazada
+	return cont;
 }
 
 void reemplazar(struct Dato *ptr, int viejo, int nuevo){
@@ -220,6 +223,41 @@ void reemplazar(struct Dato *ptr, int viejo, int nuevo){
 		printf("\nNo se encontro el valor a reemplazar\n");
 	}
 }
+
+void ordenar(struct Dato **ptr){
+	struct Dato *ptrAux, *ptrTemp, *ptrAnt;
+	int i;
+	if(*ptr == NULL){
+		printf("\nNo Hay datos para ordenar\n");
+	} else {
+		i = contar(*ptr);
+		for(; i>0; i--){
+			ptrAux = *ptr;
+			ptrAnt = NULL;
+
+			for( ;ptrAux -> ptrSig != NULL ; ){
+				if(ptrAux -> d > (ptrAux->ptrSig)->d){
+					ptrTemp = ptrAux->ptrSig;
+					ptrAnt = ptrAux;
+					ptrAux->ptrSig = ptrTemp->ptrSig;
+					ptrTemp->ptrSig = ptrAux;
+					ptrAnt = ptrTemp;
+
+					ptrTemp = ptrAux->ptrSig;
+					//ptrAnt = ptrAux;
+					ptrAux = ptrTemp -> ptrSig;
+					ptrTemp = ptrAnt;
+				} else {
+					ptrAnt = ptrAux;
+					ptrAux = ptrAux->ptrSig;
+				}
+			}
+		}
+		ptrAux = *ptr;
+		mostrarDato(*ptr);
+	}
+}
+
 /**
  * Si ves esto prometo mejorarlo xd
  */
