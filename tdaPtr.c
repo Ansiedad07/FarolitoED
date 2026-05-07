@@ -238,15 +238,15 @@ void ordenar(struct Dato **ptr){
 			for( ;ptrAux -> ptrSig != NULL ; ){
 				if(ptrAux -> d > (ptrAux->ptrSig)->d){
 					ptrTemp = ptrAux->ptrSig;
-					ptrAnt = ptrAux;
+					//ptrAnt = ptrAux;
 					ptrAux->ptrSig = ptrTemp->ptrSig;
 					ptrTemp->ptrSig = ptrAux;
+					if(ptrAnt == NULL){
+						*ptr = ptrTemp;
+					} else {
+						ptrAnt -> ptrSig = ptrTemp;
+					}
 					ptrAnt = ptrTemp;
-
-					ptrTemp = ptrAux->ptrSig;
-					//ptrAnt = ptrAux;
-					ptrAux = ptrTemp -> ptrSig;
-					ptrTemp = ptrAnt;
 				} else {
 					ptrAnt = ptrAux;
 					ptrAux = ptrAux->ptrSig;
