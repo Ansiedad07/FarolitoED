@@ -77,7 +77,9 @@ int main(void){
                 if(ptr == NULL){
                     printf("\nNo hay memoria para liberar\n");
                 } else {
-                    ptrAux = ptr->ptrSig;
+					ptrAux = ptr->ptrSig;
+					//(ptrTemp->ptrSig)->ptrAnt=NULL;
+					//(ptrTemp->ptrAnt)->ptrSig=NULL;
                     while(ptrAux != ptr){
                         ptrTemp = ptrAux;
                         ptrAux = ptrAux->ptrSig;
