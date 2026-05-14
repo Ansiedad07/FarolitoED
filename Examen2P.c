@@ -14,8 +14,15 @@ struct Dato{
     struct Dato *ptrAnt;
 };
 
-int menu(void);
-
+int menu(void){
+    int opcion;
+    printf("\n1.- Crear dato\n");
+    printf("2.- Mostrar dato\n");
+    printf("3.- Liberar nodo\n");
+    printf("4.- Salir\n");
+    scanf("%d", &opcion);
+    return opcion;
+}
 
 struct Dato *crearDato(void);
 void mostrarDato(struct Dato *ptr);
@@ -89,16 +96,6 @@ int main(void){
     } while(opcion != 4);
 }
 
-int menu(void){
-    int opcion;
-    printf("\n1.- Crear dato\n");
-    printf("2.- Mostrar dato\n");
-    printf("3.- Liberar nodo\n");
-    printf("4.- Salir\n");
-    scanf("%d", &opcion);
-    return opcion;
-}
-
 struct Dato *crearDato(void){
     struct Dato *ptrTemp;
     ptrTemp = (struct Dato *)malloc(sizeof(struct Dato));
@@ -128,7 +125,7 @@ void mostrarDato(struct Dato *ptr){
             printf("%d -> ", ptrAux->d);
             ptrAux = ptrAux->ptrSig;
         } while(ptrAux != ptr);
-        printf("inicio\n");
+
     }
 }
 
