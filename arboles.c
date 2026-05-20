@@ -33,14 +33,11 @@ int main(void){
 					raiz = ptrTemp;
 				} else {
 					ptrAux = raiz;
-					if(ptrAux->dato == NULL && ptrTemp > ptrAux->dato){
-						ptrAux -> der = ptrTemp;
-					} else {
-						ptrAux -> izq = ptrTemp;
-					}
-					while(ptrTemp->der == NULL || ptrTemp->izq == NULL){
-						if(ptrTemp->dato > ptrTemp->dato){
-							ptrTemp -> der = ptrTemp;
+					while (){
+						if(ptrTemp->dato < ptrAux->dato){
+							if(ptrAux->izq = ptrTemp){
+								
+							}
 						}
 					}
 				}
@@ -54,7 +51,7 @@ int main(void){
 	return 0;
 }
 
-int crearNodo(void){
+struct arbol * crearNodo(void){
 	struct arbol *ptrTemp;
 	ptrTemp = (struct arbol *)malloc(sizeof(struct arbol));
 	if(ptrTemp == NULL){
