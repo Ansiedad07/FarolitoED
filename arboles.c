@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 struct arbol{
 	int dato;
@@ -17,9 +18,11 @@ int menu() {
     return opcion;
 }
 
+struct arbol * crearNodo(void);
+
 int main(void){
 	struct arbol *raiz = NULL, *ptrTemp = NULL, *ptrAux = NULL;
-	int opcion;
+	int opcion, insertado;
 
 	do{
 		opcion = menu();
@@ -33,15 +36,28 @@ int main(void){
 					raiz = ptrTemp;
 				} else {
 					ptrAux = raiz;
-					while (){
+					insertado = 0;
+					while (insertado == 0){
 						if(ptrTemp->dato < ptrAux->dato){
-							if(ptrAux->izq = ptrTemp){
-								
+							if(ptrAux->der == NULL){
+								ptrAux->der = ptrTemp;
+								insertado = 1;
+							} else {
+								ptrAux = ptrAux->der;
+							}
+						} else {
+							if(ptrAux->izq == NULL){
+								ptrAux->izq = ptrTemp;
+								insertado = 1;
+							} else {
+								ptrAux = ptrAux->izq;
 							}
 						}
 					}
 				}
 			}
+			break;
+		case 2:
 			break;
 		default:
 			break;
