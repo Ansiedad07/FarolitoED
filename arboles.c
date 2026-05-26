@@ -77,17 +77,17 @@ int main(void){
 				int val, nuevo;
 				switch (op2){
 					case 1:
-						printf("\nArbol en InOrden\n");
+						printf("\nÁrbol en InOrden\n");
 						InOrden(raiz);
 						printf("\n");
 						break;
 					case 2:
-						printf("\nArbol en PreOrden\n");
+						printf("\nÁrbol en PreOrden\n");
 						PreOrden(raiz);
 						printf("\n");
 						break;
 					case 3:
-						printf("\nArbol en PostOrden\n");
+						printf("\nÁrbol en PostOrden\n");
 						PostOrden(raiz);
 						printf("\n");
 						break;
@@ -144,3 +144,12 @@ void PostOrden(struct arbol *p){
 		printf("%4d ",p->dato);
 	}
 }
+
+//* En la función borrar debemos eliminar todos los nodos que quedan en el árbol, para esto debemos recorrer el árbol en post orden y en la visita eliminar el nodo:
+/*void borrar(struct arbol *raiz){
+    if (raiz != NULL){
+        borrar(raiz->izq);
+        borrar(raiz->der);
+        free(raiz);
+    }
+}*/
